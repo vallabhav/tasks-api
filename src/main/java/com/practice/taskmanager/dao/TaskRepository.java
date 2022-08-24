@@ -3,6 +3,7 @@ package com.practice.taskmanager.dao;
 import com.practice.taskmanager.models.Task;
 
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -39,6 +40,15 @@ public class TaskRepository {
         Task task = get(taskId);
         if (null != task) {
             tasks.remove(task);
+        }
+    }
+
+    public void deleteMultiple(String[] taskIds) {
+        for (String taskId: taskIds) {
+            Task task = get(taskId);
+            if (null != task) {
+                tasks.remove(task);
+            }
         }
     }
 

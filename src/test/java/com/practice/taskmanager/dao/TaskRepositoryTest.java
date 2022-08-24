@@ -60,6 +60,13 @@ class TaskRepositoryTest {
     }
 
     @Test
+    public void testDeleteMultiple() {
+        assertEquals(taskRepository.getAll().size(), 2, "initial size");
+        taskRepository.deleteMultiple(new String[]{"1001", "1002"});
+        assertEquals(taskRepository.getAll().size(), 0, "size after deleting 2 tasks");
+    }
+
+    @Test
     public void testGet() {
         Task task = taskRepository.get("1001");
         assertNotNull(task);

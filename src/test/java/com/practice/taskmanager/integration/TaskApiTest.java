@@ -114,6 +114,24 @@ class TaskApiTest {
         assertNull(taskDeleted);
     }
 
+    //@Test
+    void deleteMultiple() {
+
+        Task taskTobeDeleted = taskFirst;
+
+        Client client = EXT.client();
+        Response response = client.target(
+                String.format("http://localhost:%d/tasks", EXT.getLocalPort()))
+                .request(MediaType.APPLICATION_JSON)
+                .build("DELETE", Entity.entity(new String[]{taskTobeDeleted.getId()}, MediaType.APPLICATION_JSON))
+                .invoke();
+
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
+
+        Task taskDeleted = getTask(taskTobeDeleted.getId());
+        assertNull(taskDeleted);
+    }
+
     private static Task newTask() {
         Task task = new Task();
         task.setDescription("first");

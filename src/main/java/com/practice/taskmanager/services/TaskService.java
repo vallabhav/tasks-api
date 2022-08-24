@@ -48,17 +48,16 @@ public class TaskService {
         taskRepository.delete(taskId);
     }
 
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteMultiple(String[] taskIds) {
+        taskRepository.deleteMultiple(taskIds);
+    }
+
     @PUT
     @Path("/{taskId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void update(@PathParam("taskId") String taskId, Task task) {
         taskRepository.update(taskId, task);
     }
-
-    @DELETE
-    @Path("/reset")
-    public void reset() {
-        taskRepository.reset();
-    }
-
 }

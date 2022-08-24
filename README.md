@@ -1,4 +1,4 @@
-# tasks-api
+# Tasks Management service
 
 It's CRUD rest api service for task management.
 
@@ -54,7 +54,7 @@ docker images | grep "tasks-api"
 ### Run docker image(Test the site at: http://localhost:9002)
 
 ```sh
-docker run -d -p 9002:80 tasks-api:latest 
+docker run -d -p 9002:8080 tasks-api:latest 
 ```
 
 ### check the logs
