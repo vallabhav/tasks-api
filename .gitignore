@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+.gradle/
+build/
+bin/
+logs/
+out
+.project
+.settings/
+.classpath
+gradle/
+gradlew
+gradlew.bat

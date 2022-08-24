@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+application {
+    //mainClass.set('com.practice.taskmanager.TasksManagerApplication')
+}
+
+ext {
+    dropwizardVersion = '2.1.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
+
+    testImplementation (group: 'io.dropwizard', name: 'dropwizard-testing', version: '2.1.1') {
+        exclude group: 'junit'
+    }
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes 'Main-Class': 'com.practice.taskmanager.TasksManagerApplication'
+    }
+}
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.practice.taskmanager.TasksManagerApplication'
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+test {
+    exclude 'com/practice/taskmanager/integration/TaskApiTest.class'
+    useJUnitPlatform()
+}
+
+task integration(type: Test) {
+    include 'com/practice/taskmanager/integration/*'
+    exclude 'com/practice/taskmanager/dao/*'
+    useJUnitPlatform()
+}
+
