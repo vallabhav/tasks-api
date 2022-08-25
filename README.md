@@ -62,3 +62,56 @@ docker run -d -p 9002:8080 tasks-api:latest
 docker ps | grep "tasks-api"
 docker logs -f <docker ps id>
 ```
+## Run unit/integration tests
+
+### unit tests
+
+```sh
+gradle test 
+```
+### integration tests
+
+```sh
+gradle integration 
+```
+## Sample api requests
+### create a task:
+```sh
+headers: Content-Type: application/json
+POST http://localhost:9002/tasks
+ {
+        "description": "task1",
+        "date": 1661990400000
+}
+```
+### get all tasks:
+```sh
+headers: Content-Type: application/json
+GET http://localhost:9002/tasks/all
+```
+### update a task:
+```sh
+headers: Content-Type: application/json
+PUT http://localhost:9002/tasks/68620b97-96cf-4181-bf80-086b4f2c29f0
+ {
+        "description": "task updated from postman",
+        "date": 1661990400000
+}
+```
+### get a particular task:
+```sh
+headers: Content-Type: application/json
+GET http://localhost:9002/tasks/68620b97-96cf-4181-bf80-086b4f2c29f0
+```
+
+### delete a single task:
+```sh
+headers: Content-Type: application/json
+DELETE http://localhost:9002/tasks/68620b97-96cf-4181-bf80-086b4f2c29f0
+```
+
+
+
+
+
+
